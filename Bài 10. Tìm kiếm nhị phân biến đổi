@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int first(int a[],int l,int r,int x){
+    if(l>r)return -1;
+    int m=(l+r)/2;
+    if(a[m]==x){
+        if(first(a,l,m-1,x)==-1)return m;
+        else return first(a,l,m-1,x);
+    }
+    else if(x<a[m])return first(a,l,m-1,x);
+    else return first(a,m+1,r,x);
+}
+
+int last(int a[],int l,int r,int x){
+    if(l>r)return -1;
+    int m=(l+r)/2;
+    if(a[m]==x){
+        if(last(a,m+1,r,x)==-1)return m;
+        else return last(a,m+1,r,x);
+    }
+    else if(x<a[m])return last(a,l,m-1,x);
+    else return last(a,m+1,r,x);
+
+}
+
+int firstt(int a[],int l,int r,int x){
+    if(l>r)return -1;
+    int m=(l+r)/2;
+    if(a[m]>=x){
+        if(firstt(a,l,m-1,x)==-1)return m;
+        else return firstt(a,l,m-1,x);
+    }
+    else return firstt(a,m+1,r,x);
+
+}
+
+int firsttt(int a[],int l,int r,int x){
+    if(l>r)return -1;
+    int m=(l+r)/2;
+    if(a[m]>x){
+        if(firsttt(a,l,m-1,x)==-1)return m;
+        else return firsttt(a,l,m-1,x);
+    }
+    else return firsttt(a,m+1,r,x);
+    
+}
+int main(){
+    int n,x;
+    cin>>n>>x;
+    int a[n];
+    for(int i=0;i<n;i++)cin>>a[i];
+    cout<<first(a,0,n-1,x)<<endl<<last(a,0,n-1,x)<<endl
+    <<firstt(a,0,n-1,x)<<endl<<firsttt(a,0,n-1,x)<<endl;
+    if(last(a,0,n-1,x)==-1 && first(a,0,n-1,x)==-1)cout<<"0";
+    else cout<<last(a,0,n-1,x)- first(a,0,n-1,x) +1;
+}
+      
