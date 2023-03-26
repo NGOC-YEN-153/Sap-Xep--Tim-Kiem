@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define f first
+#define s second
+int comp(pair<int,int>a,pair<int,int>b){
+    return a.s<b.s;
+}
+int main(){
+    int n;cin>>n;
+    pair<int ,int>a[n];
+    for(int i=0;i<n;i++){
+        int key,value;
+        cin>>key>>value;
+        a[i].f=key;a[i].s=value;
+    }
+    sort(a,a+n,comp);
+    
+    int kiluc=0,cnt=0;
+    for(int i=0;i<n;i++){
+        if(a[i].f>=kiluc){
+            cnt++;
+            kiluc=a[i].s;
+        }
+    }
+    cout<<cnt;
+}
+      
