@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+int main(){
+    int n,m,k;
+    cin>>n>>m>>k;
+    int a[n],b[m];for(int &x:a)cin>>x;for(int &x:b)cin>>x;
+    sort(a,a+n);sort(b,b+n);
+    int i=0,j=0;ll ans=0;
+    while(i<n && j<m){
+        if(a[i]-5<=a[j] && a[j]<=a[i]+5 ){
+            ans++;i++;j++;
+        }
+        else if(a[j]<a[i]-5)j++;
+        else if(a[j]>a[i]+5)i++;
+    }
+    cout<<ans;
+}
