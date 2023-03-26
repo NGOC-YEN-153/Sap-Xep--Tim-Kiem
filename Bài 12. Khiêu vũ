@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+    ll n,m;cin>>n>>m;
+    ll a[n],b[m];
+    set<int> v,t;
+    for(ll &x:a){
+        cin>>x;
+    }
+    for(ll &x:b){
+        cin>>x;
+    }
+    ll i=0,j=0,ok=0;
+    while(i<n&&j<m){
+        if(a[i]>b[j]){
+            ok++;i++;j++;
+        }
+        else {
+            i++;
+        }
+    }
+    cout<<ok<<endl;
+}
