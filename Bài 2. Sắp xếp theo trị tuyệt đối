@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int partition(int a[],int l,int r){
+    int pivot=a[r],j=0;
+    for(int i=0;i<r;i++){
+        if(a[i]<pivot){
+            swap(a[j++],a[i]);
+        }
+    }
+    swap(a[r],a[j]);
+    return j;
+}
+void merge(int a[],int l,int m,int r){
+    vector<int>x(a+l,a+m+1);
+    vector<int>y(a+m+1,a+r+1);
+    int i=0,j=0,k=l;
+    while(i<x.size() && j<y.size()){
+        if(x[i]>y[j]){
+            a[k++]=y[j++];
+        }
+        else a[k++]=x[i++];
+    }
+    while(i<x.size())a[k++]=x[i++];
+    while(j<y.size())a[k++]=y[j++];
+}
+void mergeS(int a[],int l,int r){
+    if(l<r){
+    int m=(l+r)/2;
+    mergeS(a,l,m);
+    mergeS(a,m+1,r);
+    merge(a,l,m,r);
+    }
+}
+void qs(int a[],int l,int r){
+    if(l<r){
+        int p=partition(a,l,r);
+    qs(a,l,p-1);
+    qs(a,p+1,r );
+    }
+}
+int comp(int a,int b){
+    return abs(a)<abs(b);
+}
+int main(){
+    int n;cin>>n;
+    int a[n];
+    for(int &x:a)cin>>x;
+    stable_sort(a,a+n,comp);
+    for(int i=0;i<n;i++)cout<<a[i]<<" ";
+}
+      
