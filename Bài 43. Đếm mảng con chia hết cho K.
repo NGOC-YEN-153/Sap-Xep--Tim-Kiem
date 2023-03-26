@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#define FOR(i,a,b) for(int i = (a); i < (b); i++)
+#define FORd(i,a,b) for(int i = (a); i >= (b); i--)
+using namespace std;
+#define ll long long
+int main(){
+    ll n;cin >>n;
+    map<ll,ll>mp;
+    ll a[n];
+    for(ll &x : a) cin >> x;
+    ll ans = 0,sum = 0;
+    for(int i=0;i<n;i++){
+        sum=(sum%n+a[i]%n+n)%n;
+        if(sum % n == 0){
+            ans++;
+            if(mp.find(0) != mp.end() ) ans += mp[0];
+        }
+        if(sum %n != 0){
+            ll x = sum % n;
+            if(mp.find(x) != mp.end() )ans += mp[x];
+        }
+        sum%=n;
+        mp[sum%n]++;
+    }
+    cout<< ans;
+}
