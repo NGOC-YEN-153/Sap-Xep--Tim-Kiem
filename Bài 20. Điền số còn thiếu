@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define f first
+#define s second
+int main(){
+    int n;cin>>n;
+    set<int>a;
+    for(int i=0;i<n;i++){
+        int x;cin>>x;
+        a.insert(x);
+    }
+    int cnt=0;
+    auto cii=a.end();
+    cii--;
+    for(auto it=a.begin();it!=cii;it++){
+        int ai=*it;
+        it++;
+        if(*(it)-ai>1){
+            cnt+=*(it)-ai-1;
+            it--;
+            continue;
+        }
+        it--;
+    }
+    cout<<cnt;
+}
+      
