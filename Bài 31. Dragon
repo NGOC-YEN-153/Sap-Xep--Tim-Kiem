@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+int main(){
+    int n;
+    cin>>n;
+    ll s;cin>>s;
+    multimap<int,int>a;
+    while(n--){
+        int x,y;cin>>x>>y;
+        a.insert({x,y});
+    }
+    int ok=1;
+    while(a.size()){
+        auto it=a.lower_bound(s);
+        if(it==a.begin()){
+            ok=0;
+            break;
+        }
+        else {
+            --it;
+            s+=(*it).second;
+            a.erase(it);
+        }
+    }
+    if(ok)cout<<"YES";
+    else cout<<"NO";
+}
+        
+
