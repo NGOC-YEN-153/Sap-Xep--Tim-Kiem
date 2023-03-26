@@ -1,0 +1,191 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define endl "\n"
+#define For(i,a,b) for(int i=a;i<b;i++)
+#define Forb(i,a,b) for(int i=a;i<=b;i++)
+#define mp make_pair
+#define vi vector<int>
+#define vll vector<ll>
+#define pb push_back
+#define is insert
+#define pi pair<int,int>
+#define vii vector<pi>
+const int MOD=1e9+7;
+const int Maxn = 1e7 + 1;
+using namespace std;
+ll nto(ll n)
+{
+    for(int i=2;i<=sqrt(n);i++)
+    {
+        if(n%i==0) return 0; 
+    }
+    return n>1; 
+}
+ll prime[10000001];
+void sang()
+{
+    For(i,2,10000001) prime[i]=1;
+    prime[0]=0;
+    prime[1]=0;
+    for(int i=2;i<=sqrt(10000000);i++)
+    {
+        if(prime[i])
+        {
+            for(int j=i*i;j<=10000000;j+=i)
+            {
+                prime[j]=0;
+            }
+        }
+    }
+} 
+int ktra2(int n)
+{
+    int sum=0;
+    while(n)
+    {
+        int sd=n%10;
+        sum+=sd;
+        if(sd!=2 && sd!=3 && sd!=5 && sd!=7) return 0;
+        n/=10;
+    }
+    return nto(sum);
+}
+int uoc[1000001];
+void sanguoc()
+{
+    For(i,1,1000001) uoc[i]=i;
+    for(int i=2;i<=sqrt(1000000);i++)
+    {
+        if(uoc[i]==i)
+        {
+            for(int j=i*i;j<=1000000;j+=i)
+            {
+                if(uoc[j]==j) uoc[j]=i;
+            }
+        }
+    }
+}
+ll legen(ll n,ll p)
+{ 
+   ll res=0;
+   for(ll i=p;i<=n;i*=p)
+   {
+           res+=n/i;
+           res%=MOD;
+   }
+   return res;
+}
+ll tongchuso(ll n)
+{
+    ll sum1=0;
+    while(n)
+    {
+        sum1+=n%10;
+        n/=10; 
+    } 
+    return sum1; 
+} 
+bool kt(int s)
+{
+    int las=s%10;
+    s=s/10; 
+    while(s)
+    {
+        if(las<s%10) return false;
+        s/=10; 
+    } 
+    return true; 
+} 
+ll hh[33];
+void hoanhao()
+{
+    int cnt=0; 
+    for(int i=2;i<=1000;i++)
+    {
+        if(cnt==8) break; 
+        if(nto(i))
+        {
+            ll tam=(ll)pow(2,i)-1;
+            if(nto(tam))
+            {
+                ll tam2=1ll*tam*(ll)pow(2,i-1);
+                hh[cnt++]=tam2; 
+            } 
+        } 
+    } 
+} 
+ll powmod(ll a,ll b,ll m)
+{
+    a%=m; 
+    ll res=1;
+    while(b)
+    {
+        if(b%2==1)
+        {
+            res*=a;
+            res%=m;
+        }
+        a*=a;
+        a%=m;
+        b/=2;
+    }
+    return res;
+}
+int cnt[10000001]={0};
+ll gt[1000001];
+void giaithua()
+{
+    gt[0]=1;
+    gt[1]=1;
+    for(int i=2;i<=1000000;i++)
+    {
+        gt[i]=gt[i-1]*i;
+        gt[i]%=MOD; 
+    } 
+} 
+ll inverst(ll a,ll m)
+{
+    return powmod(a,m-2,m); 
+} 
+ll x,y,d;
+void precision(ll a,ll b)
+{
+    if(b==0)
+    {
+        x=1;
+        y=0; 
+        d=a; 
+    }
+    else 
+    {
+        precision(b,a%b);
+        ll tam=x;
+        x=y;
+        y=tam-a/b*y; 
+    } 
+} 
+
+bool bs(int a[], int l, int r, int x){
+    if(l < r)
+        return false;
+    int m = (l + r) / 2;
+    if(a[m] == x)
+        return true;
+    else if(a[m] < x)
+        return bs(a, m + 1, r, x);
+    else
+        return bs(a, l, m - 1, x);
+}
+int main(){
+    int n, k; cin >> n >> k; 
+    int a[n];
+    for(int i = 0; i < n; i++) cin >> a[i];
+    sort(a, a + n);
+    int cnt = 1;
+    for(int i = 0; i < n - 1; i++){
+        if(a[i + 1] - a[i] > k)
+            cnt++;
+    }
+    cout << cnt << endl;
+}
+
