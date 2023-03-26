@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+int main(){
+    int n;cin>>n;
+    int a[n];for(int i=0;i<n;i++)cin>>a[i];
+    ll ans=0,i=0,j=0,res=0;
+    map<int,int>mp;
+    for(int j=0;j<n;j++){
+        if(mp.find(a[j])==mp.end()){
+            res=j-i+1;
+            mp[a[j]]++;
+        }
+        else {
+            mp[a[j]]++;
+            while(i<n){
+                if(a[i]==a[j]){
+                    mp[a[i]]--;
+                    if(mp[a[j]]==1){
+                        i++;
+                        break;
+                    }
+                }
+                else {
+                    mp[a[i]]--;
+                    if(!mp[a[i]])mp.erase(a[i]);
+                }
+                ++i;
+            }
+            res=j-i+1;
+        }
+        if(res>ans)ans=res;
+    }
+    cout<<ans;
+}
